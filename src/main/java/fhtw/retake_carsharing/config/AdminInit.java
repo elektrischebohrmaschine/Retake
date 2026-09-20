@@ -1,4 +1,4 @@
-package fhtw.retake_carsharing.Config;
+package fhtw.retake_carsharing.config;
 
 import fhtw.retake_carsharing.perisistence.entities.User;
 import fhtw.retake_carsharing.perisistence.entities.UserRole;

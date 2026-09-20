@@ -1,24 +1,57 @@
+@customerToken = e0613f64-4aa2-49cd-8d56-cbf3e05c60f1
+@adminToken = df8c09a7-d442-43f9-ab78-1d52e84227ba
+
 ### Signup
 POST http://localhost:8080/api/signup
 Content-Type: application/json
 
-{"firstname":"elektrische","lastname":"bohrmaschine","age":21,"username":"elektrischebohrmaschine","password":"brumbrum12","creditCardNr":"1111","driversLicenceNr":"A123"}
+{"firstname":"Milo","lastname":"mimo","age":23,"username":"king","password":"1234","creditCardNr":"1111","driversLicenceNr":"A123"}
 
-### Login
+### Login Kunde
 POST http://localhost:8080/api/session/login
-Authorization: Basic elektrischebohrmaschine brumbrum12
+Authorization: Basic king 1234
 
-### Drivers List
+### Login Admin
+POST http://localhost:8080/api/session/login
+Authorization: Basic admin admin123
+
+### Driver-Liste
 GET http://localhost:8080/api/drivers
-Authorization: e0613f64-4aa2-49cd-8d56-cbf3e05c60f1
+Authorization: {{customerToken}}
+
+### Eigenes Profil ändern
+PUT http://localhost:8080/api/drivers/3
+Authorization: {{customerToken}}
+Content-Type: application/json
+
+{"age":420}
 
 ### Logout
 POST http://localhost:8080/api/session/logout
-Authorization: a18b6190-5048-473f-8b91-2805bd7338b6
+Authorization: {{customerToken}}
 
-### Update
-PUT http://localhost:8080/api/drivers/1
-Authorization: e0613f64-4aa2-49cd-8d56-cbf3e05c60f1
+### Auto anlegen
+POST http://localhost:8080/api/cars
+Authorization: {{adminToken}}
 Content-Type: application/json
 
-{"firstname":"elektrische","lastname":"bohrmaschine","age":33,"creditCardNr":"1111","driversLicenceNr":"A123"}
+{"carName":"Testauto","description":"Rotes Auto","coordinates":{"latitude":48.2,"longitude":16.3}}
+
+### Alle Autos
+GET http://localhost:8080/api/cars
+Authorization: {{adminToken}}
+
+### Ein Auto
+GET http://localhost:8080/api/cars/1
+Authorization: {{adminToken}}
+
+### Auto ändern
+PATCH http://localhost:8080/api/car/1
+Authorization: {{adminToken}}
+Content-Type: application/json
+
+{"carName":"Neuer Name"}
+
+### Auto löschen
+DELETE http://localhost:8080/api/car/1
+Authorization: {{adminToken}}

@@ -1,4 +1,4 @@
-package fhtw.retake_carsharing.Controller;
+package fhtw.retake_carsharing.controller;
 
 
 import fhtw.retake_carsharing.perisistence.entities.User;
