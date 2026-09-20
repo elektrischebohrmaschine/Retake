@@ -70,3 +70,7 @@ Authorization: {{carToken}}
 Content-Type: application/json
 
 {"statusUpdate":{"currentUser":"max","coordinates":{"latitude":48.2,"longitude":16.3},"time":"2026-09-20T10:00:00","status":"OCCUPIED","kilometer":0.0,"duration":60},"priority":"HIGH","description":"Unfall"}
+
+### Report Gen
+POST http://localhost:8080/api/reports/1
+Authorization: {{adminToken}}
