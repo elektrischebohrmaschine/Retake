@@ -28,6 +28,7 @@ public class UserService {
     }
 
     public Optional<User> authenticateAdmin(String token) {
+        // is this an Admin?
         Optional<User> potAdmin = authenticate(token);
         if (potAdmin.isEmpty() || !potAdmin.get().isAdmin()) {
             return Optional.empty();
@@ -44,6 +45,7 @@ public class UserService {
     }
 
     public Optional<User> authenticate (String token){
+        // token tells us who this is
         if (token == null || token.isBlank()){
             return Optional.empty();}
 
@@ -52,11 +54,11 @@ public class UserService {
 
     public Optional<User> signUp(User newUser){
         if(userRepo.findByUsername(newUser.getUsername()).isPresent()){
-            return Optional.empty();
+            return Optional.empty(); // username already taken
         }
         newUser.setUserRole(UserRole.CUSTOMER);
-        newUser.setId(null);
-        newUser.setToken(null);
+        newUser.setId(null); // DB already does that for us
+        newUser.setToken(null); // only at login
         userRepo.save(newUser);
         return Optional.of(newUser);
     }
@@ -64,12 +66,13 @@ public class UserService {
     public Optional<User> login(String username, String password){
         Optional<User> potUser = userRepo.findByUsername(username);
         if(potUser.isEmpty()){
-            return Optional.empty();
+            return Optional.empty(); // username does not exist
         }
         User loggedUser = potUser.get();
         if(!loggedUser.getPassword().equals(password)){
             return Optional.empty();
         }
+        // creating new token = one person can only be connected once
         String newToken = UUID.randomUUID().toString();
         loggedUser.setToken(newToken);
         userRepo.save(loggedUser);
@@ -78,7 +81,6 @@ public class UserService {
     }
 
     public boolean logout(String token){
-
         Optional<User> potUser =authenticate(token);
         if(potUser.isEmpty()){
             return false;

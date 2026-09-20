@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fehler</title>
+</head>
+<body>
+<h1>Upsi, wir san falsch abgebogen =0</h1>
+<p th:text="${status} + ' - ' + ${error}"></p>
+<a th:href="@{/}">Zur Startseite</a>
+</body>
+</html>

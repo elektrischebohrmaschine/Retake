@@ -1,16 +1,16 @@
-@customerToken = e0613f64-4aa2-49cd-8d56-cbf3e05c60f1
-@adminToken = df8c09a7-d442-43f9-ab78-1d52e84227ba
-@carToken = b1afc606-a1a2-4490-a2c1-c0d918d3c92c
+@customerToken = 672e3c19-9872-4bc6-9c2d-c435f15a78d9
+@adminToken = 7921c133-07a6-475b-9d1b-ae17ef0904f8
+@carToken = 4096e4ce-f926-4b10-b5c0-70845f3e861e
 
 ### Signup
 POST http://localhost:8080/api/signup
 Content-Type: application/json
 
-{"firstname":"Milo","lastname":"mimo","age":23,"username":"king","password":"1234","creditCardNr":"1111","driversLicenceNr":"A123"}
+{"firstname":"Katharina","lastname":"lul","age":23,"username":"Kathi123","password":"1234","creditCardNr":"1111","driversLicenceNr":"A123"}
 
 ### Login Kunde
 POST http://localhost:8080/api/session/login
-Authorization: Basic king 1234
+Authorization: Basic Kathi123 1234
 
 ### Login Admin
 POST http://localhost:8080/api/session/login
@@ -21,11 +21,11 @@ GET http://localhost:8080/api/drivers
 Authorization: {{customerToken}}
 
 ### Eigenes Profil ändern
-PUT http://localhost:8080/api/drivers/3
+PUT http://localhost:8080/api/drivers/6
 Authorization: {{customerToken}}
 Content-Type: application/json
 
-{"age":420}
+{"age":420, "firstname": "Catlyn"}
 
 ### Logout
 POST http://localhost:8080/api/session/logout
@@ -36,41 +36,44 @@ POST http://localhost:8080/api/cars
 Authorization: {{adminToken}}
 Content-Type: application/json
 
-{"carName":"neues Auto","description":"Göb Auto","coordinates":{"latitude":42.0,"longitude":18.7}}
+{"carName":"Auto 1","description":"böB Auto","coordinates":{"latitude":42.0,"longitude":18.7}}
 
 ### Alle Autos
 GET http://localhost:8080/api/cars
 Authorization: {{adminToken}}
 
 ### Ein Auto
-GET http://localhost:8080/api/cars/1
+GET http://localhost:8080/api/cars/7
 Authorization: {{adminToken}}
 
 ### Auto ändern
-PATCH http://localhost:8080/api/car/2
+PATCH http://localhost:8080/api/car/6
 Authorization: {{adminToken}}
 Content-Type: application/json
 
-{"carName":"Neuer Name"}
+{"carName":"Auto 3"}
 
 ### Auto löschen
-DELETE http://localhost:8080/api/car/1
+DELETE http://localhost:8080/api/car/2
 Authorization: {{adminToken}}
 
 ### Status
-POST http://localhost:8080/api/cars/2/status
+POST http://localhost:8080/api/cars/7/status
 Authorization: {{carToken}}
 Content-Type: application/json
 
-{"currentUser":"max","coordinates":{"latitude":48.2,"longitude":16.3},"time":"2026-09-20T10:00:00","status":"OCCUPIED","kilometer":1.5,"duration":60}
+{"currentUser":"Catlyn","coordinates":{"latitude":48.2,"longitude":16.3},"time":"2026-09-20T10:00:59","status":"OCCUPIED","kilometer":1.5,"duration":60}
 
 ### Alarm
-POST http://localhost:8080/api/cars/2/alarm
+POST http://localhost:8080/api/cars/7/alarm
 Authorization: {{carToken}}
 Content-Type: application/json
 
 {"statusUpdate":{"currentUser":"max","coordinates":{"latitude":48.2,"longitude":16.3},"time":"2026-09-20T10:00:00","status":"OCCUPIED","kilometer":0.0,"duration":60},"priority":"HIGH","description":"Unfall"}
 
 ### Report Gen
-POST http://localhost:8080/api/reports/1
+POST http://localhost:8080/api/reports/6
 Authorization: {{adminToken}}
+
+
+// docker exec -it carsharing-db psql -U postgres -d carsharing -c "SELECT id, username, user_role, token FROM list_user;"

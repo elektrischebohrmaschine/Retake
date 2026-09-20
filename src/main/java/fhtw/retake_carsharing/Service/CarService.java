@@ -32,7 +32,7 @@ public class CarService {
 
 
     public Car createCar (Car newCar){
-        newCar.setCarID(null);
+        newCar.setCarID(null); // DB does that
         newCar.setCurrentUser(null);
         newCar.setStatus(CarStatus.FREE);
         String newToken = UUID.randomUUID().toString();
@@ -74,6 +74,7 @@ public class CarService {
     }
 
     public Optional<Car> authenticateCar(Long id, String token) {
+        // for Status and Alarm
         Optional<Car> potCar = carRepo.findById(id);
         if (potCar.isEmpty()) {
             return Optional.empty();

@@ -31,6 +31,7 @@ public class CarStatusController {
     @PostMapping("/cars/{carId}/status")
     public ResponseEntity<Void> carStatus(@PathVariable Long carId, @Valid @RequestBody CarStatusUpdates carStatusU, @RequestHeader(value = "Authorization", required = false) String carToken) {
         Optional<Car> potCar = carService.authenticateCar(carId, carToken);
+        // does this car exist?
         if (potCar.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

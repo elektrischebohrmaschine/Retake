@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<User> register (@Valid @RequestBody User newUser){
+    public ResponseEntity<User> signup(@Valid @RequestBody User newUser){
         Optional<User> potNewUser = userService.signUp(newUser);
         if(potNewUser.isEmpty()){
             return new ResponseEntity<>(HttpStatus.CONFLICT);
