@@ -27,6 +27,14 @@ public class UserService {
         return userRepo.findByUserRole(UserRole.CUSTOMER);
     }
 
+    public Optional<User> authenticateAdmin(String token) {
+        Optional<User> potAdmin = authenticate(token);
+        if (potAdmin.isEmpty() || !potAdmin.get().isAdmin()) {
+            return Optional.empty();
+        }
+        return potAdmin;
+    }
+
     public Optional<User> findByUserId (Long id){
         return userRepo.findById(id);
     }
@@ -93,13 +101,23 @@ public class UserService {
         if (!currentUser.getId().equals(id)) {
             return Optional.empty();
         }
+        if (updatedUser.getFirstname() != null && !updatedUser.getFirstname().isBlank()) {
+            currentUser.setFirstname(updatedUser.getFirstname());
+        }
+        if (updatedUser.getLastname() != null && !updatedUser.getLastname().isBlank()) {
+            currentUser.setLastname(updatedUser.getLastname());
+        }
 
-        currentUser.setFirstname(updatedUser.getFirstname());
-        currentUser.setLastname(updatedUser.getLastname());
-        currentUser.setAge(updatedUser.getAge());
-        currentUser.setCreditCardNr(updatedUser.getCreditCardNr());
-        currentUser.setDriversLicenceNr(updatedUser.getDriversLicenceNr());
+        if (updatedUser.getAge() != null) {
+            currentUser.setAge(updatedUser.getAge());
+        }
+        if (updatedUser.getCreditCardNr() != null && !updatedUser.getCreditCardNr().isBlank()) {
+            currentUser.setCreditCardNr(updatedUser.getCreditCardNr());
+        }
 
+        if (updatedUser.getDriversLicenceNr() != null && !updatedUser.getDriversLicenceNr().isBlank()) {
+            currentUser.setDriversLicenceNr(updatedUser.getDriversLicenceNr());
+        }
         return Optional.of(userRepo.save(currentUser));
     }
 

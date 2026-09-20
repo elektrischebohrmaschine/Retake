@@ -1,0 +1,24 @@
+### Signup
+POST http://localhost:8080/api/signup
+Content-Type: application/json
+
+{"firstname":"elektrische","lastname":"bohrmaschine","age":21,"username":"elektrischebohrmaschine","password":"brumbrum12","creditCardNr":"1111","driversLicenceNr":"A123"}
+
+### Login
+POST http://localhost:8080/api/session/login
+Authorization: Basic elektrischebohrmaschine brumbrum12
+
+### Drivers List
+GET http://localhost:8080/api/drivers
+Authorization: e0613f64-4aa2-49cd-8d56-cbf3e05c60f1
+
+### Logout
+POST http://localhost:8080/api/session/logout
+Authorization: a18b6190-5048-473f-8b91-2805bd7338b6
+
+### Update
+PUT http://localhost:8080/api/drivers/1
+Authorization: e0613f64-4aa2-49cd-8d56-cbf3e05c60f1
+Content-Type: application/json
+
+{"firstname":"elektrische","lastname":"bohrmaschine","age":33,"creditCardNr":"1111","driversLicenceNr":"A123"}
