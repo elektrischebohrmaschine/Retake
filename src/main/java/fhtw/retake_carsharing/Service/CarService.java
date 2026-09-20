@@ -1,10 +1,9 @@
-package fhtw.retake_carsharing.service;
+package fhtw.retake_carsharing.Service;
 
 
-import fhtw.retake_carsharing.perisistence.entities.Car;
-import fhtw.retake_carsharing.perisistence.entities.CarStatus;
-import fhtw.retake_carsharing.perisistence.entities.User;
-import fhtw.retake_carsharing.perisistence.repositories.CarRepository;
+import fhtw.retake_carsharing.Perisistence.Entities.Car;
+import fhtw.retake_carsharing.Perisistence.Entities.CarStatus;
+import fhtw.retake_carsharing.Perisistence.Repositories.CarRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -72,5 +71,17 @@ public class CarService {
         Car deletedCar = potCar.get();
         carRepo.delete(deletedCar);
         return true;
+    }
+
+    public Optional<Car> authenticateCar(Long id, String token) {
+        Optional<Car> potCar = carRepo.findById(id);
+        if (potCar.isEmpty()) {
+            return Optional.empty();
+        }
+        Car car = potCar.get();
+        if (!car.getToken().equals(token)) {
+            return Optional.empty();
+        }
+        return Optional.of(car);
     }
 }

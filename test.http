@@ -1,5 +1,6 @@
 @customerToken = e0613f64-4aa2-49cd-8d56-cbf3e05c60f1
 @adminToken = df8c09a7-d442-43f9-ab78-1d52e84227ba
+@carToken = b1afc606-a1a2-4490-a2c1-c0d918d3c92c
 
 ### Signup
 POST http://localhost:8080/api/signup
@@ -35,7 +36,7 @@ POST http://localhost:8080/api/cars
 Authorization: {{adminToken}}
 Content-Type: application/json
 
-{"carName":"Testauto","description":"Rotes Auto","coordinates":{"latitude":48.2,"longitude":16.3}}
+{"carName":"neues Auto","description":"Göb Auto","coordinates":{"latitude":42.0,"longitude":18.7}}
 
 ### Alle Autos
 GET http://localhost:8080/api/cars
@@ -46,7 +47,7 @@ GET http://localhost:8080/api/cars/1
 Authorization: {{adminToken}}
 
 ### Auto ändern
-PATCH http://localhost:8080/api/car/1
+PATCH http://localhost:8080/api/car/2
 Authorization: {{adminToken}}
 Content-Type: application/json
 
@@ -55,3 +56,17 @@ Content-Type: application/json
 ### Auto löschen
 DELETE http://localhost:8080/api/car/1
 Authorization: {{adminToken}}
+
+### Status
+POST http://localhost:8080/api/cars/2/status
+Authorization: {{carToken}}
+Content-Type: application/json
+
+{"currentUser":"max","coordinates":{"latitude":48.2,"longitude":16.3},"time":"2026-09-20T10:00:00","status":"OCCUPIED","kilometer":1.5,"duration":60}
+
+### Alarm
+POST http://localhost:8080/api/cars/2/alarm
+Authorization: {{carToken}}
+Content-Type: application/json
+
+{"statusUpdate":{"currentUser":"max","coordinates":{"latitude":48.2,"longitude":16.3},"time":"2026-09-20T10:00:00","status":"OCCUPIED","kilometer":0.0,"duration":60},"priority":"HIGH","description":"Unfall"}

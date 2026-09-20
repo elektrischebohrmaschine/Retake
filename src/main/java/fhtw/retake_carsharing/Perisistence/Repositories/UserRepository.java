@@ -1,7 +1,7 @@
-package fhtw.retake_carsharing.perisistence.repositories;
+package fhtw.retake_carsharing.Perisistence.Repositories;
 
-import fhtw.retake_carsharing.perisistence.entities.User;
-import fhtw.retake_carsharing.perisistence.entities.UserRole;
+import fhtw.retake_carsharing.Perisistence.Entities.User;
+import fhtw.retake_carsharing.Perisistence.Entities.UserRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

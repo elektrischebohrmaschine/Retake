@@ -1,5 +1,7 @@
-package fhtw.retake_carsharing.config;
+package fhtw.retake_carsharing.Config;
 
+import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.amqp.support.converter.JacksonJsonMessageConverter;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.QueueBuilder;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -32,6 +34,11 @@ public class RabbitMQConfig {
     }
 
     @Bean
+    public MessageConverter messageConverter(){
+        return new JacksonJsonMessageConverter();
+    }
+
+    @Bean
     public ConnectionFactory connectionFactory(
             @Value("${spring.rabbitmq.host}") String host,
             @Value("${spring.rabbitmq.port}") int port,
@@ -44,7 +51,9 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
-        return new RabbitTemplate(connectionFactory);
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory, MessageConverter messageConverter) {
+        RabbitTemplate template= new RabbitTemplate(connectionFactory);
+        template.setMessageConverter(messageConverter);
+        return template;
     }
 }

@@ -1,4 +1,4 @@
-package fhtw.retake_carsharing.perisistence.entities;
+package fhtw.retake_carsharing.Perisistence.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,10 +1,10 @@
-package fhtw.retake_carsharing.controller;
+package fhtw.retake_carsharing.Controller;
 
 
-import fhtw.retake_carsharing.perisistence.entities.Car;
-import fhtw.retake_carsharing.perisistence.entities.User;
-import fhtw.retake_carsharing.service.CarService;
-import fhtw.retake_carsharing.service.UserService;
+import fhtw.retake_carsharing.Perisistence.Entities.Car;
+import fhtw.retake_carsharing.Perisistence.Entities.User;
+import fhtw.retake_carsharing.Service.CarService;
+import fhtw.retake_carsharing.Service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

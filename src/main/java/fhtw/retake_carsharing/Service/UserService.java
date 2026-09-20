@@ -1,9 +1,9 @@
-package fhtw.retake_carsharing.service;
+package fhtw.retake_carsharing.Service;
 
 
-import fhtw.retake_carsharing.perisistence.entities.User;
-import fhtw.retake_carsharing.perisistence.entities.UserRole;
-import fhtw.retake_carsharing.perisistence.repositories.UserRepository;
+import fhtw.retake_carsharing.Perisistence.Entities.User;
+import fhtw.retake_carsharing.Perisistence.Entities.UserRole;
+import fhtw.retake_carsharing.Perisistence.Repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
